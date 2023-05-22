@@ -17,6 +17,8 @@ Citizen.CreateThread(function()
                 end
                 lastDamage = curHealth
             end
+        else
+            Citizen.Wait(1000)
         end
 
     Citizen.Wait(0)
