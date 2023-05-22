@@ -3,7 +3,7 @@ local curDamage = 0.0
 local vehicle = nil
 
 Citizen.CreateThread(function()
-  local sleep = 1000
+    local sleep = 1000
 	while true do
         local playerPed = PlayerPedId()
         local vehicle = GetVehiclePedIsIn(playerPed, false)
