@@ -1,24 +1,24 @@
-local lastdamage = 0.0
-local curdamage = 0.0
-local curspeed = 0.0
-local vehicle
+local lastDamage = 0.0
+local curDamage = 0.0
+local vehicle = nil
 
 Citizen.CreateThread(function()
-	while true do
-        local veh2 = GetVehiclePedIsIn(PlayerPedId(), false)
-        vehicle = GetVehiclePedIsIn(PlayerPedId(-1), false)
-        if DoesEntityExist(vehicle) and vehicle then
-            local veh = GetVehiclePedIsIn(GetPlayerPed(-1))
-			local shakeRate = GetEntitySpeed(veh) / 250.0
-            print(shakeRate)
-            lastdamage = curdamage
-            curdamage = GetVehicleBodyHealth(vehicle)
-            if curdamage ~= lastdamage then
-                ShakeGameplayCam("MEDIUM_EXPLOSION_SHAKE", shakeRate)
+    while true do
+    local playerPed = PlayerPedId()
+    local vehicle = GetVehiclePedIsIn(playerPed, false)
+
+        if DoesEntityExist(vehicle) then
+            local shakeRate = GetEntitySpeed(vehicle) / 250.0
+
+            if vehicle ~= nil and vehicle ~= 0 then
+                local curHealth = GetVehicleBodyHealth(vehicle)
+                if curHealth ~= lastDamage then
+                    ShakeGameplayCam("MEDIUM_EXPLOSION_SHAKE", shakeRate)
+                end
+                lastDamage = curHealth
             end
-        else
-            Citizen.Wait(1000)
         end
-        Citizen.Wait(0)
-	end
+
+    Citizen.Wait(0)
+    end
 end)
