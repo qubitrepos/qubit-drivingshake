@@ -9,3 +9,7 @@ version "1.0"
 client_script 'client/main.lua'
 
 lua54 'yes'
+
+escrow_ignore {
+	"client/*.lua",
+}
